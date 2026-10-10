@@ -1,0 +1,21 @@
+src/modules/rooms/rooms.service.ts
+  s_a75a72e44d87f0::t_1a1fb76d4d721a 150-158
+src/modules/rooms/dto/filter-rooms.dto.ts
+  s_a75a72e44d87f0::t_1a1fb76d4d721a 14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.11",
+  "base_commit_sha": "5302588d9e95ec74d728686f42127b2fcc8a5d1a",
+  "prompts": {},
+  "sessions": {
+    "s_a75a72e44d87f0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "74669dd3-7d12-45b7-a30b-dd85d40f26c2",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "felixyunianto <felixyunianto@gmail.com>"
+    }
+  }
+}
