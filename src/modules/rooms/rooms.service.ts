@@ -2,7 +2,6 @@ import { BadRequestException, Injectable, NotFoundException } from "@nestjs/comm
 import { BillStatus, BillType, InventoryStatus, Prisma } from "@prisma/client";
 
 import { normalizeNameQuery } from "src/common/utils/normalize-name";
-import { getPaginationParams, paginate } from "src/common/utils/pagination";
 import { PrismaService } from "src/prisma/prisma.service";
 import { CreateRoomDto } from "./dto/create-room.dto";
 import { CreateRoomInventoryDto } from "./dto/create-room-inventory.dto";
@@ -146,28 +145,17 @@ export class RoomsService {
     this.assertRange(query.minLength, query.maxLength, "length");
     this.assertRange(query.minWidth, query.maxWidth, "width");
 
-    const { page, limit, skip, take } = getPaginationParams(query);
     const where = this.buildFindAllWhere(propertyId, query);
 
-    const [rooms, total] = await this.prismaService.$transaction([
-      this.prismaService.room.findMany({
-        where,
-        include: roomDetailInclude,
-        orderBy: {
-          name: "asc",
-        },
-        skip,
-        take,
-      }),
-      this.prismaService.room.count({ where }),
-    ]);
+    const rooms = await this.prismaService.room.findMany({
+      where,
+      include: roomDetailInclude,
+      orderBy: {
+        name: "asc",
+      },
+    });
 
-    return paginate(
-      rooms.map((room) => this.toRoomResponse(room)),
-      page,
-      limit,
-      total,
-    );
+    return rooms.map((room) => this.toRoomResponse(room));
   }
 
   async findOne(userId: string, propertyId: string, roomId: string) {

@@ -11,9 +11,7 @@ import {
   Min,
 } from "class-validator";
 
-import { PaginationQueryDto } from "src/common/dto/pagination-query.dto";
-
-export class FilterRoomsDto extends PaginationQueryDto {
+export class FilterRoomsDto {
   @IsOptional()
   @IsString()
   @MaxLength(100)
